@@ -11,8 +11,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.dependencyinjectiondagger.ui.theme.DependencyInjectionDaggerTheme
+import javax.inject.Inject
 
 class MainActivity : ComponentActivity() {
+    // Every late int var need a Inject when we call for dependencies
+    //This is field Injection
+
+    @Inject
+    lateinit var userRegistrationService:UserRegistration
+    @Inject
+    lateinit var emailServiceRegistration:EmailService
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -22,8 +31,7 @@ class MainActivity : ComponentActivity() {
                 // Create an instance of the class
 
                 val component = DaggerUserRegistrationComponent.builder().build()
-                val userRegistrationService = component.getUserRegistrationService()
-                val emailServiceRegistration = component.getEmailRegistrationService()
+                component.inject(this)
                 userRegistrationService.registerUser("sonu@gmail.com", "123456")
                 emailServiceRegistration.send("abxc" , "xyz" , "Namste")
             }

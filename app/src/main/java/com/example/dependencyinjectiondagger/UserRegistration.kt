@@ -2,6 +2,7 @@ package com.example.dependencyinjectiondagger
 
 import javax.inject.Inject
 
+// and the inject was constructer Injection
 class UserRegistration @Inject constructor(
     private val userRespository: UserRepository ,
                        private val emaiService: EmailService
