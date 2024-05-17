@@ -2,7 +2,7 @@ package com.example.dependencyinjectiondagger
 
 import dagger.Component
 
-@Component
+@Component(modules = [UserRepositoryModule::class , NotificationServiceModule::class])
 interface UserRegistrationComponent {
 //    fun getUserRegistrationService() : UserRegistration
 //    fun getEmailRegistrationService() : EmailService

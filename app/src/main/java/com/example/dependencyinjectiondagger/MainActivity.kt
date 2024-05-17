@@ -20,7 +20,7 @@ class MainActivity : ComponentActivity() {
     @Inject
     lateinit var userRegistrationService:UserRegistration
     @Inject
-    lateinit var emailServiceRegistration:EmailService
+    lateinit var messageService:NotificationService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +33,7 @@ class MainActivity : ComponentActivity() {
                 val component = DaggerUserRegistrationComponent.builder().build()
                 component.inject(this)
                 userRegistrationService.registerUser("sonu@gmail.com", "123456")
-                emailServiceRegistration.send("abxc" , "xyz" , "Namste")
+                messageService.send("abxc" , "xyz" , "Namste")
             }
         }
     }

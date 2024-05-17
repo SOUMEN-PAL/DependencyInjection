@@ -2,15 +2,17 @@ package com.example.dependencyinjectiondagger
 
 import javax.inject.Inject
 
+
+
 // and the inject was constructer Injection
 class UserRegistration @Inject constructor(
     private val userRespository: UserRepository ,
-                       private val emaiService: EmailService
+    private val notificationService: NotificationService
 ) {
 
     fun registerUser(email : String , password : String){
         userRespository.saveUser(email , password)
-        emaiService.send(email , "no-reply@xyzgmail.com" , "Welcome to our App")
+        notificationService.send(email , "no-reply@xyzgmail.com" , "Welcome to our App")
     }
 
 }
