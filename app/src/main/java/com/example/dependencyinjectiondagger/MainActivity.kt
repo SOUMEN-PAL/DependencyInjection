@@ -21,8 +21,11 @@ class MainActivity : ComponentActivity() {
 
                 // Create an instance of the class
 
-                val userRegistrationService = DaggerUserRegistrationComponent.builder().build().getUserRegistrationService()
+                val component = DaggerUserRegistrationComponent.builder().build()
+                val userRegistrationService = component.getUserRegistrationService()
+                val emailServiceRegistration = component.getEmailRegistrationService()
                 userRegistrationService.registerUser("sonu@gmail.com", "123456")
+                emailServiceRegistration.send("abxc" , "xyz" , "Namste")
             }
         }
     }
