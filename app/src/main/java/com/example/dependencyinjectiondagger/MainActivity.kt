@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.dependencyinjectiondagger.ui.theme.DependencyInjectionDaggerTheme
 import javax.inject.Inject
+import javax.inject.Named
 
 class MainActivity : ComponentActivity() {
     // Every late int var need a Inject when we call for dependencies
@@ -19,8 +20,10 @@ class MainActivity : ComponentActivity() {
 
     @Inject
     lateinit var userRegistrationService:UserRegistration
+
     @Inject
-    lateinit var messageService:NotificationService
+    @Named("mail") lateinit var mailService:NotificationService
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +36,7 @@ class MainActivity : ComponentActivity() {
                 val component = DaggerUserRegistrationComponent.builder().build()
                 component.inject(this)
                 userRegistrationService.registerUser("sonu@gmail.com", "123456")
-                messageService.send("abxc" , "xyz" , "Namste")
+                mailService.send("Pata nahi" , "patania" , "hello")
             }
         }
     }

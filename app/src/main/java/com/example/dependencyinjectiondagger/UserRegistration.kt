@@ -1,13 +1,13 @@
 package com.example.dependencyinjectiondagger
 
 import javax.inject.Inject
-
+import javax.inject.Named
 
 
 // and the inject was constructer Injection
 class UserRegistration @Inject constructor(
     private val userRespository: UserRepository ,
-    private val notificationService: NotificationService
+    @Named("email") private val notificationService: NotificationService
 ) {
 
     fun registerUser(email : String , password : String){
