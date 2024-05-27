@@ -22,8 +22,10 @@ class MainActivity : ComponentActivity() {
     lateinit var userRegistrationService:UserRegistration
 
     @Inject
-    @Named("mail") lateinit var mailService:NotificationService
+    @Named("email") lateinit var mailService:NotificationService
 
+    @Inject
+    @Named("SQLRepo") lateinit var SQLService : UserRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +39,7 @@ class MainActivity : ComponentActivity() {
                 component.inject(this)
                 userRegistrationService.registerUser("sonu@gmail.com", "123456")
                 mailService.send("Pata nahi" , "patania" , "hello")
+                SQLService.saveUser("ffafs", "afdsfsd")
             }
         }
     }

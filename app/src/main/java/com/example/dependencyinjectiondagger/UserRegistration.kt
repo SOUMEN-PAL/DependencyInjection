@@ -6,7 +6,7 @@ import javax.inject.Named
 
 // and the inject was constructer Injection
 class UserRegistration @Inject constructor(
-    private val userRespository: UserRepository ,
+    @Named("FireBase") private val userRespository: UserRepository ,
     @Named("email") private val notificationService: NotificationService
 ) {
 
