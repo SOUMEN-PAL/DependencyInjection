@@ -32,9 +32,10 @@ class MainActivity : ComponentActivity() {
     @Inject
     @Named("email") lateinit var mailService:NotificationService
 
-
+    @Inject
     lateinit var emailService : EmailService
 
+    @Inject
     lateinit var emailService1 : EmailService
 
     @Inject
@@ -52,16 +53,12 @@ class MainActivity : ComponentActivity() {
                     mutableIntStateOf(0)
                 }
 
-                val component = DaggerUserRegistrationComponent.factory().create(retryCount , 2)
+                val component = (application as UserApplication).userRegistrationComponent
 
                 component.inject(this)
                 userRegistrationService.registerUser("sonu@gmail.com", "123456")
                 mailService.send("Pata nahi" , "patania" , "hello")
                 SQLService.saveUser("ffafs", "afdsfsd")
-                emailService = component.getEMailService()
-                emailService1 = component.getEMailService()
-
-
 
 
                 Column(modifier = Modifier
