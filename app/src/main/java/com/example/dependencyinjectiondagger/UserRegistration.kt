@@ -7,7 +7,7 @@ import javax.inject.Named
 // and the inject was constructer Injection
 class UserRegistration @Inject constructor(
     @Named("FireBase") private val userRespository: UserRepository ,
-    @Named("email") private val notificationService: NotificationService
+    @MessageQualifier private val notificationService: NotificationService
 ) {
 
     fun registerUser(email : String , password : String){

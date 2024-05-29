@@ -4,20 +4,21 @@ import android.content.ContentValues.TAG
 import android.nfc.Tag
 import android.util.Log
 import javax.inject.Inject
+import javax.inject.Singleton
 
 interface NotificationService{
     fun send(to : String , from:String , body : String?)
 
 }
-
-class EmailService  @Inject constructor() : NotificationService {
+@Singleton
+class EmailService  @Inject constructor(private var popData : Int) : NotificationService {
     override fun send(to: String, from: String, body: String?) {
-        Log.d("SIDBOT", "Email Sent")
+        Log.d("SIDBOT", "Email Sent $popData")
     }
 }
-class MessageService : NotificationService{
+class MessageService(private var retryCount : Int) : NotificationService{
     override fun send(to: String, from: String, body: String?) {
-        Log.d(TAG , "Message Sent")
+        Log.d(TAG , "Message Sent - Retry Cout $retryCount")
     }
 
 }

@@ -3,16 +3,24 @@ package com.example.dependencyinjectiondagger
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.dependencyinjectiondagger.ui.theme.DependencyInjectionDaggerTheme
+import java.lang.annotation.RetentionPolicy
 import javax.inject.Inject
 import javax.inject.Named
+import javax.inject.Scope
 
 class MainActivity : ComponentActivity() {
     // Every late int var need a Inject when we call for dependencies
@@ -23,6 +31,11 @@ class MainActivity : ComponentActivity() {
 
     @Inject
     @Named("email") lateinit var mailService:NotificationService
+
+
+    lateinit var emailService : EmailService
+
+    lateinit var emailService1 : EmailService
 
     @Inject
     @Named("SQLRepo") lateinit var SQLService : UserRepository
@@ -35,11 +48,33 @@ class MainActivity : ComponentActivity() {
 
                 // Create an instance of the class
 
-                val component = DaggerUserRegistrationComponent.builder().build()
+                val retryCount = remember {
+                    mutableIntStateOf(0)
+                }
+
+                val component = DaggerUserRegistrationComponent.factory().create(retryCount , 2)
+
                 component.inject(this)
                 userRegistrationService.registerUser("sonu@gmail.com", "123456")
                 mailService.send("Pata nahi" , "patania" , "hello")
                 SQLService.saveUser("ffafs", "afdsfsd")
+                emailService = component.getEMailService()
+                emailService1 = component.getEMailService()
+
+
+
+
+                Column(modifier = Modifier
+                    .fillMaxSize(),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
+                ) {
+                    Button(onClick = {
+                        retryCount.intValue++
+                    }) {
+                        Text(text = "Button")
+                    }
+                }
             }
         }
     }

@@ -4,6 +4,7 @@ import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import javax.inject.Named
+import javax.inject.Scope
 
 @Module
 class UserRepositoryModule {
@@ -17,12 +18,14 @@ class UserRepositoryModule {
 //    @Binds
 //    abstract fun getSQLRepository(sqlRepository: SQLRepository) : UserRepository
 
+
     @Named("FireBase")
     @Provides
     fun getFireBaseRepository() : UserRepository{
         return FirebaseRepository()
     }
 
+    // so here we can have a typo error and so we can make a custom Qualifier
     @Named("SQLRepo")
     @Provides
     fun getSQLRepository(sqlRepository: SQLRepository):UserRepository{

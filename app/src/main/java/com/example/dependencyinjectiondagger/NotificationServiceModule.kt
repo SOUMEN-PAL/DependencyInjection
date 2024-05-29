@@ -1,23 +1,25 @@
 package com.example.dependencyinjectiondagger
 
+import androidx.compose.runtime.MutableIntState
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import javax.inject.Named
+import javax.inject.Singleton
 
 @Module
-class NotificationServiceModule {
-
-    @Named("message")
+class NotificationServiceModule() {
+    @Singleton
+    @MessageQualifier
     @Provides
-    fun getMessageService():NotificationService{
-        return MessageService()
+    fun getMessageService(retryCount : MutableIntState):NotificationService{
+        return MessageService(retryCount.intValue)
     }
 
     @Named("email")
     @Provides
-    fun getMailService(emailService: EmailService):NotificationService{
-        return emailService
+    fun getMailService(popData:Int):NotificationService{
+        return EmailService(popData)
     }
 }
 
