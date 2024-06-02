@@ -17,7 +17,8 @@ class SQLRepository @Inject constructor(@Named("firebaseAnalytics")val analytics
     }
 }
 
-class FirebaseRepository @Inject constructor(@Named("mixpanelAnalytics") val analyticsService: AnalyticsService) : UserRepository{
+class FirebaseRepository (@Named("mixpanelAnalytics") val analyticsService: AnalyticsService) : UserRepository{
+
     override fun saveUser(email: String, password: String) {
         Log.d(TAG , "User saved in firebase")
         analyticsService.trackEvent("SaveUser" , "Create")

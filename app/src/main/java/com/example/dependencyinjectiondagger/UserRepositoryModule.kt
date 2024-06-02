@@ -21,8 +21,8 @@ class UserRepositoryModule {
 
     @Named("FireBase")
     @Provides
-    fun getFireBaseRepository() : UserRepository{
-        return FirebaseRepository()
+    fun getFireBaseRepository(@Named("mixpanelAnalytics") analyticsService: AnalyticsService) : UserRepository{
+        return FirebaseRepository(analyticsService)
     }
 
     // so here we can have a typo error and so we can make a custom Qualifier
