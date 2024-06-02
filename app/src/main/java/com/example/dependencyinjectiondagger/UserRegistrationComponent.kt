@@ -6,7 +6,7 @@ import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [UserRepositoryModule::class , NotificationServiceModule::class])
+@Component(modules = [UserRepositoryModule::class , NotificationServiceModule::class , AnalyticsModule::class])
 interface UserRegistrationComponent {
 //    fun getUserRegistrationService() : UserRegistration
 //    fun getEmailRegistrationService() : EmailService
@@ -15,7 +15,6 @@ interface UserRegistrationComponent {
 
     fun inject(mainActivity: MainActivity)
 
-    fun getEMailService() : EmailService
 
     @Component.Factory
     interface Factory{

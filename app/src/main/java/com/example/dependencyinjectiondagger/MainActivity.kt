@@ -32,11 +32,7 @@ class MainActivity : ComponentActivity() {
     @Inject
     @Named("email") lateinit var mailService:NotificationService
 
-    @Inject
-    lateinit var emailService : EmailService
 
-    @Inject
-    lateinit var emailService1 : EmailService
 
     @Inject
     @Named("SQLRepo") lateinit var SQLService : UserRepository
@@ -54,8 +50,9 @@ class MainActivity : ComponentActivity() {
                 }
 
                 val component = (application as UserApplication).userRegistrationComponent
-
                 component.inject(this)
+
+
                 userRegistrationService.registerUser("sonu@gmail.com", "123456")
                 mailService.send("Pata nahi" , "patania" , "hello")
                 SQLService.saveUser("ffafs", "afdsfsd")
