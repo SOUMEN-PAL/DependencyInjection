@@ -49,8 +49,9 @@ class MainActivity : ComponentActivity() {
                     mutableIntStateOf(0)
                 }
 
-                val component = (application as UserApplication).userRegistrationComponent
-                component.inject(this)
+                val appComponent = (application as UserApplication).appComponent
+                val userRegistrationComponent = DaggerUserRegistrationComponent.factory().create( retryCount, 2 , appComponent)
+                userRegistrationComponent.inject(this)
 
 
                 userRegistrationService.registerUser("sonu@gmail.com", "123456")

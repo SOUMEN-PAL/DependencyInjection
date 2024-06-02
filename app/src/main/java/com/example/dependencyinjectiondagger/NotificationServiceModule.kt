@@ -9,12 +9,14 @@ import javax.inject.Singleton
 
 @Module
 class NotificationServiceModule() {
-    @Singleton
+    @ActivityScope
     @MessageQualifier
     @Provides
     fun getMessageService(retryCount : MutableIntState):NotificationService{
         return MessageService(retryCount.intValue)
     }
+
+
 
     @Named("email")
     @Provides

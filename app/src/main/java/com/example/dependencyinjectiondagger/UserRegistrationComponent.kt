@@ -5,8 +5,8 @@ import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
 
-@Singleton
-@Component(modules = [UserRepositoryModule::class , NotificationServiceModule::class , AnalyticsModule::class])
+@ActivityScope
+@Component(dependencies = [AppComponent::class],modules = [UserRepositoryModule::class , NotificationServiceModule::class])
 interface UserRegistrationComponent {
 //    fun getUserRegistrationService() : UserRegistration
 //    fun getEmailRegistrationService() : EmailService
@@ -18,6 +18,6 @@ interface UserRegistrationComponent {
 
     @Component.Factory
     interface Factory{
-        fun create(@BindsInstance retryCount : MutableIntState , @BindsInstance popData : Int) : UserRegistrationComponent
+        fun create(@BindsInstance retryCount : MutableIntState , @BindsInstance popData : Int , appComponent: AppComponent) : UserRegistrationComponent
     }
 }

@@ -9,7 +9,7 @@ import javax.inject.Singleton
 interface UserRepository {
     fun saveUser(email : String , password: String)
 }
-@Singleton
+@ActivityScope
 class SQLRepository @Inject constructor(@Named("firebaseAnalytics")val analyticsService: AnalyticsService):UserRepository{
     override fun saveUser(email : String, password: String){
         Log.d("SIDBOT" , "User Saved in DB")
@@ -17,6 +17,8 @@ class SQLRepository @Inject constructor(@Named("firebaseAnalytics")val analytics
     }
 }
 
+
+@ActivityScope
 class FirebaseRepository (@Named("mixpanelAnalytics") val analyticsService: AnalyticsService) : UserRepository{
 
     override fun saveUser(email: String, password: String) {
