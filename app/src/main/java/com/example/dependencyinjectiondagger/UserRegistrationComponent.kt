@@ -1,6 +1,7 @@
 package com.example.dependencyinjectiondagger
 
 import androidx.compose.runtime.MutableIntState
+import dagger.Binds
 import dagger.BindsInstance
 import dagger.Component
 import dagger.Subcomponent
@@ -16,9 +17,14 @@ interface UserRegistrationComponent {
 
     fun inject(mainActivity: MainActivity)
 
+//Used Builder pattern in SUbcomponent
+    @Subcomponent.Builder
+    interface Builder{
 
-    @Subcomponent.Factory
-    interface Factory{
-        fun create(@BindsInstance retryCount : MutableIntState , @BindsInstance popData : Int) : UserRegistrationComponent
+        fun build() : UserRegistrationComponent
+        fun retryCount(@BindsInstance retryCount : MutableIntState) : Builder
+        fun popData(@BindsInstance popData : Int) : Builder
+
+    //        fun create(@BindsInstance retryCount : MutableIntState , @BindsInstance popData : Int) : UserRegistrationComponent
     }
 }

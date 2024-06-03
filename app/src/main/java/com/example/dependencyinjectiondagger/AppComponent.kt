@@ -15,5 +15,5 @@ interface AppComponent {
 //
 //    // Jab @Inject nahi use kar rahe ho in the component we need to use the Names anotations for providing the implementations as how would dagger know what to provide
 
-    fun getUserRegistrationComponentFactory() : UserRegistrationComponent.Factory
+    fun getUserRegistrationComponentBuilder() : UserRegistrationComponent.Builder
 }

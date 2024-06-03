@@ -51,7 +51,7 @@ class MainActivity : ComponentActivity() {
                 }
 
                 val appComponent = (application as UserApplication).appComponent
-                val userRegistrationComponent = appComponent.getUserRegistrationComponentFactory().create(retryCount , 2 )
+                val userRegistrationComponent = appComponent.getUserRegistrationComponentBuilder().retryCount(retryCount).popData(2).build()
                 userRegistrationComponent.inject(this)
 
                 Log.d("appComponent" , "${appComponent.hashCode()} , ${userRegistrationComponent.hashCode()}")
