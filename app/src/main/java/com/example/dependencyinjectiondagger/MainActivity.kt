@@ -1,6 +1,7 @@
 package com.example.dependencyinjectiondagger
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Arrangement
@@ -53,6 +54,7 @@ class MainActivity : ComponentActivity() {
                 val userRegistrationComponent = DaggerUserRegistrationComponent.factory().create( retryCount, 2 , appComponent)
                 userRegistrationComponent.inject(this)
 
+                Log.d("appComponent" , "${appComponent.hashCode()} , ${userRegistrationComponent.hashCode()}")
 
                 userRegistrationService.registerUser("sonu@gmail.com", "123456")
                 mailService.send("Pata nahi" , "patania" , "hello")
