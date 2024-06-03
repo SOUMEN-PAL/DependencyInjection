@@ -51,7 +51,7 @@ class MainActivity : ComponentActivity() {
                 }
 
                 val appComponent = (application as UserApplication).appComponent
-                val userRegistrationComponent = DaggerUserRegistrationComponent.factory().create( retryCount, 2 , appComponent)
+                val userRegistrationComponent = appComponent.getUserRegistrationComponentFactory().create(retryCount , 2 )
                 userRegistrationComponent.inject(this)
 
                 Log.d("appComponent" , "${appComponent.hashCode()} , ${userRegistrationComponent.hashCode()}")

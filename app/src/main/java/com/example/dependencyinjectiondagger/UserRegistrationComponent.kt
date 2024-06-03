@@ -3,10 +3,11 @@ package com.example.dependencyinjectiondagger
 import androidx.compose.runtime.MutableIntState
 import dagger.BindsInstance
 import dagger.Component
+import dagger.Subcomponent
 import javax.inject.Singleton
 
 @ActivityScope
-@Component(dependencies = [AppComponent::class],modules = [UserRepositoryModule::class , NotificationServiceModule::class])
+@Subcomponent(modules = [UserRepositoryModule::class , NotificationServiceModule::class])
 interface UserRegistrationComponent {
 //    fun getUserRegistrationService() : UserRegistration
 //    fun getEmailRegistrationService() : EmailService
@@ -16,8 +17,8 @@ interface UserRegistrationComponent {
     fun inject(mainActivity: MainActivity)
 
 
-    @Component.Factory
+    @Subcomponent.Factory
     interface Factory{
-        fun create(@BindsInstance retryCount : MutableIntState , @BindsInstance popData : Int , appComponent: AppComponent) : UserRegistrationComponent
+        fun create(@BindsInstance retryCount : MutableIntState , @BindsInstance popData : Int) : UserRegistrationComponent
     }
 }
